@@ -1,0 +1,46 @@
+import random
+import time
+from datetime import datetime
+
+# Simulate a list of network events (e.g., log entries)
+network_events = [
+    "Unauthorized login attempt from 192.168.1.100",
+    "Unusual network traffic from 10.0.0.2",
+    "Malicious file download from 172.16.0.50",
+    "Suspicious outbound connection to 203.0.113.1",
+    "Failed authentication from 192.168.2.75",
+]
+
+# Simulate a simple threat detection function
+def detect_threat(event):
+    if any(ip in event for ip in ["192.168.1.", "10.0.0.", "172.16.0."]):
+        return "Threat detected"
+    else:
+        return "No threat detected"
+
+# Simulate a simple response function
+def respond_to_threat(event):
+    if "Threat detected" in event:
+        return "Responding to the threat: blocking IP, alerting security team"
+    else:
+        return "No response needed"
+
+# Main simulation loop
+while True:
+    # Simulate incoming network events
+    event = random.choice(network_events)
+    
+    # Get the current timestamp
+    current_time = datetime.now().strftime("%b.%d.%Y %H:%M")
+    
+    print(f"[{current_time}] Received event: {event}")
+
+    # Detect and respond to the event
+    detection_result = detect_threat(event)
+    print("Detection result:", detection_result)
+
+    response_result = respond_to_threat(detection_result)
+    print("Response result:", response_result)
+
+    # Pause for a moment before the next event (simulating continuous monitoring)
+    time.sleep(2)
